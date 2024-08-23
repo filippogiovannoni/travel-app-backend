@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('stages', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('day_id')->constrained()->cascadeOnDelete();
             $table->string('title');
             $table->text('description')->nullable();
             $table->string('map_position')->nullable();
