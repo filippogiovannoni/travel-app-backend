@@ -16,7 +16,8 @@ return new class extends Migration
             $table->foreignId('day_id')->constrained()->cascadeOnDelete();
             $table->string('title');
             $table->text('description')->nullable();
-            $table->string('map_position')->nullable();
+            $table->float('latitude', 10, 6);
+            $table->float('longitude', 10, 6);
             $table->date('stage_date');
             $table->boolean('completed')->default(false);
             $table->timestamps();

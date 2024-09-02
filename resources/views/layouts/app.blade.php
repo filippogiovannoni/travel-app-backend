@@ -18,10 +18,12 @@
     {{-- Leaflet CSS --}}
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
 
     {{-- Leaflet JS --}}
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
 
     <!-- Usando Vite -->
     @vite(['resources/js/app.js'])
@@ -104,5 +106,25 @@
         </main>
     </div>
 </body>
+
+<script>
+    // Crea la mappa e imposta il centro
+    var map = L.map('map').setView([43.7696, 11.2558], 13); // Centro su Firenze
+
+    // Aggiungi il tile layer (ad esempio OpenStreetMap)
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Aggiungi l'itinerario tra due punti
+    L.Routing.control({
+        waypoints: [
+            L.latLng(43.7696, 11.2558), // Firenze
+            L.latLng(45.4642, 9.1900) // Milano
+        ],
+        routeWhileDragging: true,
+        show: false
+    }).addTo(map);
+</script>
 
 </html>
