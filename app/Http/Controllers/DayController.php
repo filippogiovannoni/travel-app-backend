@@ -24,16 +24,13 @@ class DayController extends Controller
      */
     public function create()
     {
-        //
+        return view('days.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreDayRequest $request)
-    {
-        //
-    }
+    public function store(StoreDayRequest $request) {}
 
     /**
      * Display the specified resource.
