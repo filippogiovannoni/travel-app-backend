@@ -8,7 +8,7 @@ use App\Models\Day;
 
 class Stage extends Model
 {
-    protected $fillable = ['title', 'description', 'map_position', 'stage_date', 'completed'];
+    protected $fillable = ['title', 'description', 'latitude', 'longitude', 'stage_date', 'completed'];
 
     public function day()
     {

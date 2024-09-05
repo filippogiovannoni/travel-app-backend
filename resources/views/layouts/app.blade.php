@@ -108,23 +108,58 @@
 </body>
 
 <script>
-    // Crea la mappa e imposta il centro
-    var map = L.map('map').setView([43.7696, 11.2558], 13); // Centro su Firenze
+    const map = L.map('map').setView([43.7696, 11.2558], 13);
 
-    // Aggiungi il tile layer (ad esempio OpenStreetMap)
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© OpenStreetMap contributors'
     }).addTo(map);
 
-    // Aggiungi l'itinerario tra due punti
-    L.Routing.control({
-        waypoints: [
-            L.latLng(43.7696, 11.2558), // Firenze
-            L.latLng(45.4642, 9.1900) // Milano
-        ],
-        routeWhileDragging: true,
-        show: false
-    }).addTo(map);
+    function onMapClick(e) {
+
+        console.log(e)
+        // Recupera le coordinate dal punto cliccato
+        const latitude = (e.latlng.lat).toFixed(8);
+        const longitude = (e.latlng.lng).toFixed(8);
+
+        // Posiziona un marker in quel punto
+        const marker = L.marker([latitude, longitude]).addTo(map);
+
+        // Crea un popup con un form per inserire titolo e descrizione
+        const popupContent = `
+            <div>
+                <form action="{{ route('stages.store') }}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    <div class="mb-2">
+                        <label for="title" class="form-label">Title</label>
+                        <input type="text" class="form-control" name="title" id="title" aria-describedby="titleHelper"/>
+                        <small id="titleHelper" class="form-text text-muted">Insert the stage title</small>
+                    </div>
+                    <div class="mb-2">
+                        <label for="description" class="form-label">Description</label><br>
+                        <textarea class="form-control"></textarea>
+                    </div>
+                    <div class="mb-2">
+                        <label for="latitude" class="form-label">Latitude</label>
+                        <input type="text" class="form-control" value="${latitude}" name="latitude" id="latitude" aria-describedby="latitudeHelper"/>
+                    </div>
+                    <div class="mb-2">
+                        <label for="latitude" class="form-label">Latitude</label>
+                        <input type="text" class="form-control" value="${longitude}" name="latitude" id="latitude" aria-describedby="latitudeHelper"/>
+                    </div>
+                    <button class="btn btn-sm btn-primary" type="submit">Confirm</button>
+                </form>
+            </div>
+        `;
+
+        // Aggiungi il popup al marker e aprilo
+        marker.bindPopup(popupContent).openPopup();
+
+        // Mostra le coordinate nella console (puoi fare altro con queste coordinate)
+        console.log("Le coordinate sono: Latitudine: " + latitude + ", Longitudine: " + longitude);
+    }
+
+    // Assegna la funzione onMapClick all'evento 'click' della mappa
+    map.on('click', onMapClick);
 </script>
 
 </html>
