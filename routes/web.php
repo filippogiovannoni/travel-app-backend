@@ -35,8 +35,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::post('/stages', [StageController::class, 'store']);
-
 // CRUD
 Route::resource('days', DayController::class);
 Route::resource('stages', StageController::class);

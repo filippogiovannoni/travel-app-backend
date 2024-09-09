@@ -19,7 +19,6 @@ return new class extends Migration
             $table->float('latitude', 10, 6);
             $table->float('longitude', 10, 6);
             $table->date('stage_date');
-            $table->boolean('completed')->default(false);
             $table->timestamps();
         });
     }

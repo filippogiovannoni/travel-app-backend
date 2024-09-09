@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('days', function (Blueprint $table) {
             $table->id();
-            $table->smallInteger('days_number')->require();
-            $table->string('location')->require();
+            $table->smallInteger('days_number')->unique();
+            $table->string('location')->nullable();
             $table->timestamps();
         });
     }

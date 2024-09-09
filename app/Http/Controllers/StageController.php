@@ -29,25 +29,7 @@ class StageController extends Controller
      */
     public function store(StoreStageRequest $request)
     {
-        // Valida i dati in arrivo
-        $request->validate([
-            'title' => 'required|string',
-            'latitude' => 'required|numeric',
-            'longitude' => 'required|numeric',
-            'description' => 'nullable|string',
-            'stage_date' => 'nullable|date',
-            'completed' => 'nullable|boolean'
-        ]);
-
-        // Salva il marker nel database
-        Stage::create([
-            'title' => $request->title,
-            'latitude' => $request->latitude,
-            'longitude' => $request->longitude,
-            'description' => $request->description,
-            'stage_date' => $request->stage_date,
-            'completed' => $request->completed
-        ]);
+        dd($request);
 
         return response()->json(['success' => 'Stage saved successfully']);
     }

@@ -30,7 +30,19 @@ class DayController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreDayRequest $request) {}
+    public function store(StoreDayRequest $request)
+    {
+
+        // Validate
+        $val_data = $request->validated();
+        // dd($val_data);
+
+        //Create
+        Day::create($val_data);
+
+        //Redirect
+        return to_route('days.index')->with('message', 'Day created');
+    }
 
     /**
      * Display the specified resource.

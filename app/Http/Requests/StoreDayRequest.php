@@ -11,7 +11,7 @@ class StoreDayRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,8 @@ class StoreDayRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'days_number' => 'unique:days,days_number',
+            'location' => 'nullable'
         ];
     }
 }
