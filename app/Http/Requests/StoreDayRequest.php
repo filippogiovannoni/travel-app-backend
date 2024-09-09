@@ -22,7 +22,7 @@ class StoreDayRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'days_number' => 'unique:days,days_number',
+            'days_number' => 'required|unique:days,days_number',
             'location' => 'nullable'
         ];
     }

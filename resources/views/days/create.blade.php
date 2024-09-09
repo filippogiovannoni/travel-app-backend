@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container my-2">
+        @include('partials.errors')
         <form action="{{ route('days.store') }}" method="post">
             @csrf
             <div class="mb-3">
